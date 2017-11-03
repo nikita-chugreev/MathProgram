@@ -6,6 +6,7 @@ import java.awt.*;
 public class Calc extends JFrame {
 
     private int num = 1;
+    private String keyCode;
 
     private JPanel panelEx;
     private JPanel panelBtn;
@@ -18,7 +19,7 @@ public class Calc extends JFrame {
     private JButton btnPlus, btnMinus, btnMult, btnDiv, btnEq, btnPoint;
     private JButton btnDel;
 
-    String stringOne = "", stringTwo = "";
+    private String stringOne = "", stringTwo = "";
 
     public Calc(JPanel panelCalc) {
         decl();
@@ -59,7 +60,6 @@ public class Calc extends JFrame {
     }
 
     public void add(JPanel panelCalc) {
-
         panelEx.add(numOne);
         panelEx.add(sign);
         panelEx.add(numTwo);
@@ -89,41 +89,74 @@ public class Calc extends JFrame {
         panelCalc.add(panelBtn);
     }
 
-    public void oper() {
+    public void oper(String keyCode) {
+        if (keyCode == "plus") {
+                int intOne = Integer.parseInt(stringOne);
+                int intTwo = Integer.parseInt(stringTwo);
+                int intSum = intOne + intTwo;
+                String stringSum = String.valueOf(intSum);
+                ans.setText(stringSum);
+        }
+        if (keyCode == "minus") {
+            int intOne = Integer.parseInt(stringOne);
+            int intTwo = Integer.parseInt(stringTwo);
+            int intSum = intOne - intTwo;
+            String stringSum = String.valueOf(intSum);
+            ans.setText(stringSum);
+        }
+        if (keyCode == "mult") {
+            int intOne = Integer.parseInt(stringOne);
+            int intTwo = Integer.parseInt(stringTwo);
+            int intSum = intOne * intTwo;
+            String stringSum = String.valueOf(intSum);
+            ans.setText(stringSum);
+        }
+        if (keyCode == "div") {
+            int intOne = Integer.parseInt(stringOne);
+            int intTwo = Integer.parseInt(stringTwo);
+            int intSum = intOne / intTwo;
+            String stringSum = String.valueOf(intSum);
+            ans.setText(stringSum);
+        }
 
     }
 
     public void listeners() {
+
         btnPlus.addActionListener(e -> {
             sign.setText("+");
             num = 2;
+            keyCode = "plus";
         });
 
         btnMinus.addActionListener(e -> {
             sign.setText("-");
             num = 2;
+            keyCode = "minus";
         });
 
         btnMult.addActionListener(e -> {
             sign.setText("*");
             num = 2;
+            keyCode = "mult";
         });
 
         btnDiv.addActionListener(e -> {
             sign.setText("/");
             num = 2;
+            keyCode = "div";
         });
 
         //----------------------------------
 
         btnOne.addActionListener(e -> {
-            if(num == 1) {
-                stringOne += "1";
-                numOne.setText(stringOne);
-            } else {
-                stringTwo += 1;
-                numTwo.setText(stringTwo);
-            }
+        if (num == 1) {
+            stringOne += "1";
+            numOne.setText(stringOne);
+        } else {
+            stringTwo += 1;
+            numTwo.setText(stringTwo);
+        }
         });
 
         btnTwo.addActionListener(e -> {
@@ -236,5 +269,8 @@ public class Calc extends JFrame {
             }
         });
 
+        btnEq.addActionListener(e -> oper(keyCode));
     }
+
+
 }

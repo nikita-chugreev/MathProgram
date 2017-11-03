@@ -38,7 +38,7 @@ public class Window extends JFrame {
         c.add(panelEq);
 
         new Calc(panelCalc);
-
+        new Func(panelFunc);
 
         setVisible(true);
     }
